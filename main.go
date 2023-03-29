@@ -2,7 +2,7 @@ package main
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-	"errors"
+	// "errors"
 )
 
 type book struct{
@@ -19,3 +19,15 @@ var books = []book{
 	{ID: "3", Title: "The Little Prince", Author: "Antoine de Saint-Exupéry", Quantity: 6},
 }
 
+func getBooks(c *gin.Context) {
+
+	c.IndentedJSON(http.StatusOK, books)
+
+
+}
+
+func main() {
+	router := gin.Default()
+	router.GET("/books", getBooks)
+	router.Run("localhost:8080")
+}
